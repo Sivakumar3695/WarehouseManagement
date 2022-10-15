@@ -25,7 +25,6 @@ public class Loader implements Runnable{
     @Override
     public void run() {
 
-        System.out.println(stopLoading);
         while(true)
         {
             if (stopLoading)
@@ -35,7 +34,7 @@ public class Loader implements Runnable{
             int randomInt = random.nextInt(10);
             try {
                 UUID uuid = UUID.randomUUID();
-                System.out.println("I have loaded the Item with UUID:" + uuid + " and My ID is: " + id);
+                System.out.println("Loader Worker ID: " + id + ", Loaded Item ID::" + uuid);
 
                 warehouse.pushToQueue(uuid);
                 Thread.sleep(randomInt * 1000);

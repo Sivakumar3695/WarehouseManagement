@@ -11,12 +11,14 @@ public class Supervisor implements Runnable {
     int totalDuration;
     Warehouse warehouse;
     boolean stopProcess = false;
+    int prevInc = 0;
 
 
     public Supervisor(Warehouse warehouse, int id, List<Integer> threshold, int totalDuration)
     {
         this.id = id;
         this.startTime = -1;
+        System.out.println(threshold);
         this.threshold = threshold;
         this.totalDuration = totalDuration * 1000 * 60;
         this.warehouse = warehouse;
@@ -35,7 +37,12 @@ public class Supervisor implements Runnable {
             if (threshold.get(idx) < stockListSize)
             {
                 Double returnVal = Math.pow(2, Double.valueOf(String.valueOf(idx)));
-                return Integer.valueOf(returnVal.toString().split("\\.")[0]);
+                int incCnt = Integer.valueOf(returnVal.toString().split("\\.")[0]);
+                if (incCnt <= prevInc) return -1;
+                else {
+                    prevInc = incCnt;
+                }
+                return  incCnt;
             }
 
         }

@@ -6,9 +6,7 @@ import java.util.UUID;
 public class Packer implements Runnable{
 
     int id ;
-    boolean stopProcessing = false;
     Warehouse warehouse;
-    int retryCount = 0;
 
     public Packer(Warehouse warehouse, int id)
     {
@@ -27,23 +25,20 @@ public class Packer implements Runnable{
 
                 if (stockId == null)
                 {
-                    retryCount++;
-                    if (retryCount > 3) break;
-                    return;
+                    continue;
                 }
 
-                retryCount = 0;
-
-                System.out.println("My Id:" + id + " and I packed the stock with Id:" + stockId);
+                System.out.println("Packer Worker ID: " + id + ", Packed Item ID::" + stockId);
                 Random random = new Random();
-                int randomInt = random.nextInt(5);
+                int randomInt = random.nextInt(10);
                 Thread.sleep(randomInt * 1000);
             }
             catch (Exception e)
             {
                 System.out.println("Error occurred");
             }
-
         }
+//        System.out.println("Packer Worker Id:" + id + ", Leaving now!");
+
     }
 }

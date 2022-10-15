@@ -31,6 +31,8 @@ public class Warehouse {
 
         if (nPackersToAdd == -1) return;
 
+        System.out.println("Current Queue size is: " + stock.size() +", Hence, Increasing the packer worker by:" + nPackersToAdd);
+
         for (int idx = 0 ; idx < nPackersToAdd; idx++)
         {
             Packer packer = new Packer(this, packerList.size()+idx);
@@ -41,7 +43,6 @@ public class Warehouse {
 
     public UUID getItemFromStock()
     {
-        System.out.println(this.stock.size());
         if (this.stock.isEmpty())
             return null;
 
